@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "84567697942",
+    "project_id": "pic-store-flutter-bloc",
+    "storage_bucket": "pic-store-flutter-bloc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84567697942:android:e626333239c85b9ef1a337",
+        "android_client_info": {
+          "package_name": "com.example.picstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84567697942-tqibv8ip85dhncjlprcu58qf97m0m0s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXVMJx8ScE913_FucMQZP7BIGefNSa1oM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84567697942-tqibv8ip85dhncjlprcu58qf97m0m0s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
