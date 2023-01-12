@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:picstore/auth/errors/auth_errors.dart';
 
 class AuthState extends Equatable {
@@ -18,11 +18,11 @@ class AuthState extends Equatable {
 
 class SignedInAuthState extends AuthState {
   final User user;
-  final Iterable<Reference?> images;
+  //final Iterable<Reference?> images;
 
   const SignedInAuthState({
     required this.user,
-    required this.images,
+    //required this.images,
     AuthError? authError,
     required bool isLoading,
   }) : super(
@@ -30,8 +30,9 @@ class SignedInAuthState extends AuthState {
           authError: authError,
         );
 
-  @override
-  String toString() => 'SignedInAuthState, images.length = ${images.length}';
+  // @override
+  // String toString() => 'SignedInAuthState;
+  //images.length = ${images.length}';
 }
 
 class SignedOutAuthState extends AuthState {
