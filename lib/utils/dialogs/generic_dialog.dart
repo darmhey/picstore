@@ -11,6 +11,7 @@ Future<T?> showGenericDialog<T>({
   required String title,
   required String content,
   required DialogOptionBuilder optionsBuilder,
+  required Color textColor,
 }) {
   //options = calling the optionsBuilder function
   final options = optionsBuilder();
@@ -18,11 +19,15 @@ Future<T?> showGenericDialog<T>({
     context: context,
     builder: (context) {
       return AlertDialog(
+        backgroundColor: Colors.grey[300],
         title: Text(title),
         content: Text(content),
         actions: options.keys.map((optionTitle) {
           final value = options[optionTitle];
           return TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: textColor,
+            ),
             onPressed: () {
               if (value != null) {
                 Navigator.of(context).pop(value);
@@ -30,7 +35,9 @@ Future<T?> showGenericDialog<T>({
                 Navigator.of(context).pop();
               }
             },
-            child: Text(optionTitle),
+            child: Text(
+              optionTitle,
+            ),
           );
         }).toList(), // to list cos map returns an iterable and UI cannot display iterable
       );

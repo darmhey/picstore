@@ -5,6 +5,7 @@ Future<bool> showSignOutDialog(BuildContext context) {
   return showGenericDialog<bool>(
     context: context,
     title: 'Sign out',
+    textColor: Colors.black,
     content: 'Are you sure you want to sign out?',
     optionsBuilder: () => {
       'Cancel': false,

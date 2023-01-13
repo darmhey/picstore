@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ((event, emit) async {
         //start loading
         emit(
-          const SignInViewState(isLoading: true),
+          const SignedOutAuthState(isLoading: true),
         );
         try {
           //try to get user instance with email and password
@@ -36,12 +36,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: email,
             password: password,
           );
-          final user = userCredential.user!;
+
           //if successful, sign user in the app
-          emit(SignedInAuthState(
-            isLoading: false,
-            user: user,
-          ));
+          final user = userCredential.user!;
+
+          emit(
+            SignedInAuthState(
+              isLoading: false,
+              user: user,
+            ),
+          );
           /*
           on exception, sign user out (display login view, 
           should we emit loginview) or we define in the UI that
@@ -59,14 +63,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       }),
     );
+
     on<SignOutAuthEvent>((event, emit) async {
-      //same here
-      emit(
-        const SignedOutAuthState(isLoading: true),
-      );
+      //signout
 
       await FirebaseAuth.instance.signOut();
+      //stop loading
+      emit(
+        const SignInViewState(isLoading: false),
+      );
     });
+
     on<RegisterAuthEvent>((event, emit) async {
       //start loading
       emit(const RegistrationViewState(isLoading: true));
@@ -91,7 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ));
       }
     });
-    on<InitializeAuthEvent>((event, emit) {
+    on<InitializeAuthEvent>((event, emit) async {
       //get current user
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {

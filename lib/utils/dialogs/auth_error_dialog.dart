@@ -7,6 +7,7 @@ Future<void> showAuthError({
   required BuildContext context,
 }) {
   return showGenericDialog<void>(
+    textColor: Colors.black,
     context: context,
     title: authError.dialogTitle,
     content: authError.dialogText,

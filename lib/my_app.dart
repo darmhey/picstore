@@ -51,6 +51,8 @@ class MyApp extends StatelessWidget {
               return const Gallery();
             } else if (authState is RegistrationViewState) {
               return const Register();
+            } else if (authState is SignInViewState) {
+              return const SignIn();
             } else {
               // this should never happen
               return Container();

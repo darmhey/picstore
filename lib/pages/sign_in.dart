@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:picstore/auth/bloc/bloc.dart';
 import 'package:picstore/components/my_button.dart';
 import 'package:picstore/components/my_textfield.dart';
+import 'package:picstore/utils/if_debugging.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -39,8 +42,12 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(
+    text: 'johnasco19@gmail.com'.ifDebugging,
+  );
+  final passwordController = TextEditingController(
+    text: 'dammy1111'.ifDebugging,
+  );
 
   @override
   void dispose() {
@@ -88,7 +95,9 @@ class _SignInFormState extends State<SignInForm> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                context.read<AuthBloc>().add(const GoToRegisterViewEvent());
+              },
               child: Text(
                 'Not a member? Register now',
                 style: TextStyle(
@@ -104,7 +113,16 @@ class _SignInFormState extends State<SignInForm> {
           height: 20,
         ),
         MyButton(
-          onTap: (() {}),
+          onTap: (() {
+            final email = emailController.text;
+            final password = passwordController.text;
+            context.read<AuthBloc>().add(
+                  SignInAuthEvent(
+                    email: email,
+                    password: password,
+                  ),
+                );
+          }),
           buttonText: 'Sign In',
         )
       ],
