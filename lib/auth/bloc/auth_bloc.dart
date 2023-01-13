@@ -23,10 +23,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<SignInAuthEvent>(
       ((event, emit) async {
+        //start loading
         emit(
           const SignInViewState(isLoading: true),
         );
         try {
+          //try to get user instance with email and password
           final email = event.email;
           final password = event.password;
           final userCredential =
@@ -35,10 +37,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             password: password,
           );
           final user = userCredential.user!;
+          //if successful, sign user in the app
           emit(SignedInAuthState(
             isLoading: false,
             user: user,
           ));
+          /*
+          on exception, sign user out (display login view, 
+          should we emit loginview) or we define in the UI that
+           when state is logged out display sign in view?
+          Is both okay?
+          */
+
         } on FirebaseAuthException catch (e) {
           emit(
             SignedOutAuthState(
@@ -50,6 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }),
     );
     on<SignOutAuthEvent>((event, emit) async {
+      //same here
       emit(
         const SignedOutAuthState(isLoading: true),
       );
@@ -57,15 +68,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await FirebaseAuth.instance.signOut();
     });
     on<RegisterAuthEvent>((event, emit) async {
+      //start loading
       emit(const RegistrationViewState(isLoading: true));
-      final email = event.email;
-      final password = event.password;
+      //
       try {
+        //try to create user
+        final email = event.email;
+        final password = event.password;
         final credentials =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
+        //if successful, sign in user
         emit(
           SignedInAuthState(user: credentials.user!, isLoading: false),
         );
@@ -76,7 +91,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ));
       }
     });
-    on<InitializeAuthEvent>((event, emit) async {
+    on<InitializeAuthEvent>((event, emit) {
       //get current user
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
