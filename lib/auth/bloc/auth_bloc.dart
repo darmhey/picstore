@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ((event, emit) async {
         //start loading
         emit(
-          const SignedOutAuthState(isLoading: true),
+          const SignInViewState(isLoading: true),
         );
         try {
           //try to get user instance with email and password
