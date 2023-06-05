@@ -5,10 +5,12 @@ abstract class AuthEvent {
   const AuthEvent();
 }
 
+@immutable
 class InitializeAuthEvent extends AuthEvent {
   const InitializeAuthEvent();
 }
 
+@immutable
 class SignInAuthEvent extends AuthEvent {
   final String email;
   final String password;
@@ -19,10 +21,12 @@ class SignInAuthEvent extends AuthEvent {
   });
 }
 
+@immutable
 class SignOutAuthEvent extends AuthEvent {
   const SignOutAuthEvent();
 }
 
+@immutable
 class RegisterAuthEvent extends AuthEvent {
   final String email;
   final String password;
@@ -33,10 +37,17 @@ class RegisterAuthEvent extends AuthEvent {
   });
 }
 
+@immutable
 class GoToSignInViewEvent extends AuthEvent {
   const GoToSignInViewEvent();
 }
 
+@immutable
 class GoToRegisterViewEvent extends AuthEvent {
   const GoToRegisterViewEvent();
+}
+
+@immutable
+class AppEventDeleteAccount extends AuthEvent {
+  const AppEventDeleteAccount();
 }
