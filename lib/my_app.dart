@@ -21,10 +21,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        //title: 'Flutter Demo',
+        // theme: ThemeData(
+
+        //   primarySwatch: Colors.blue,
+        // ),
         home: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, authState) {
             if (authState.isLoading) {
@@ -51,8 +52,6 @@ class MyApp extends StatelessWidget {
               return const Gallery();
             } else if (authState is RegistrationViewState) {
               return const Register();
-            } else if (authState is SignInViewState) {
-              return const SignIn();
             } else {
               // this should never happen
               return Container();

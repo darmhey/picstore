@@ -6,12 +6,12 @@ abstract class AuthEvent {
 }
 
 @immutable
-class InitializeAuthEvent extends AuthEvent {
+class InitializeAuthEvent implements AuthEvent {
   const InitializeAuthEvent();
 }
 
 @immutable
-class SignInAuthEvent extends AuthEvent {
+class SignInAuthEvent implements AuthEvent {
   final String email;
   final String password;
 
@@ -22,12 +22,12 @@ class SignInAuthEvent extends AuthEvent {
 }
 
 @immutable
-class SignOutAuthEvent extends AuthEvent {
+class SignOutAuthEvent implements AuthEvent {
   const SignOutAuthEvent();
 }
 
 @immutable
-class RegisterAuthEvent extends AuthEvent {
+class RegisterAuthEvent implements AuthEvent {
   final String email;
   final String password;
 
@@ -38,16 +38,25 @@ class RegisterAuthEvent extends AuthEvent {
 }
 
 @immutable
-class GoToSignInViewEvent extends AuthEvent {
+class GoToSignInViewEvent implements AuthEvent {
   const GoToSignInViewEvent();
 }
 
 @immutable
-class GoToRegisterViewEvent extends AuthEvent {
+class GoToRegisterViewEvent implements AuthEvent {
   const GoToRegisterViewEvent();
 }
 
 @immutable
-class AppEventDeleteAccount extends AuthEvent {
+class AppEventDeleteAccount implements AuthEvent {
   const AppEventDeleteAccount();
+}
+
+@immutable
+class AppEventUploadImage implements AuthEvent {
+  final String filePathToUpload;
+
+  const AppEventUploadImage({
+    required this.filePathToUpload,
+  });
 }
